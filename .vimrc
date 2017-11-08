@@ -1,0 +1,210 @@
+if has('python3')
+endif
+
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'tpope/vim-fugitive'
+Plugin 'majutsushi/tagbar'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Valloric/YouCompleteMe'
+" Plugin 'valloric/MatchTagAlways'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'fatih/vim-go'
+Plugin 'tpope/vim-surround'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'elzr/vim-json'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'junegunn/fzf'
+Plugin 'raimondi/delimitmate'
+Plugin 'w0rp/ale'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'python-mode/python-mode'
+Plugin 'elmcast/elm-vim'
+
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'dracula/vim'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+" filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+" When started as "evim", evim.vim will already have done these settings.
+if v:progname =~? "evim"
+	finish
+endif
+
+" Use Vim settings, rather than Vi settings (much better!).
+" This must be first, because it changes other options as a side effect.
+set nocompatible
+
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+
+set history=50		" keep 50 lines of command line history
+set ruler		" show the cursor position all the time
+set showcmd		" display incomplete commands
+set incsearch		" do incremental searching
+
+" For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
+" let &guioptions = substitute(&guioptions, "t", "", "g")
+
+" Don't use Ex mode, use Q for formatting
+map Q gq
+
+" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
+" so that you can undo CTRL-U after inserting a line break.
+inoremap <C-U> <C-G>u<C-U>
+
+" In many terminal emulators the mouse works just fine, thus enable it.
+if has('mouse')
+	set mouse=a
+endif
+
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if &t_Co > 2 || has("gui_running")
+	syntax on
+	set hlsearch
+endif
+
+" Only do this part when compiled with support for autocommands.
+if has("autocmd")
+
+	" Enable file type detection.
+	" Use the default filetype settings, so that mail gets 'tw' set to 72,
+	" 'cindent' is on in C files, etc.
+	" Also load indent files, to automatically do language-dependent indenting.
+	filetype plugin indent on
+
+	" Put these in an autocmd group, so that we can delete them easily.
+	augroup vimrcEx
+		au!
+
+		" For all text files set 'textwidth' to 78 characters.
+		autocmd FileType text setlocal textwidth=78
+
+		" When editing a file, always jump to the last known cursor position.
+		" Don't do it when the position is invalid or when inside an event handler
+		" (happens when dropping a file on gvim).
+		" Also don't do it when the mark is in the first line, that is the default
+		" position when opening a file.
+		autocmd BufReadPost *
+					\ if line("'\"") > 1 && line("'\"") <= line("$") |
+					\   exe "normal! g`\"" |
+					\ endif
+
+	augroup END
+
+else
+
+
+endif " has("autocmd")
+
+" Convenient command to see the difference between the current buffer and the
+" file it was loaded from, thus the changes you made.
+" Only define it when not defined already.
+if !exists(":DiffOrig")
+	command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+				\ | wincmd p | diffthis
+endif
+
+set splitbelow
+set splitright
+set smartindent
+
+" nnoremap <Leader>j <C-W><C-J>
+" nnoremap <Leader>k <C-W><C-K>
+" nnoremap <Leader>l <C-W><C-L>
+" nnoremap <Leader>h <C-W><C-H>
+nnoremap <Leader>q :noh<CR> 
+nnoremap <C-N> : YcmCompleter GoTo<CR>
+nnoremap <C-P> :FZF<CR>
+" nnoremap <Leader>b :buffers<CR>:buffer<Space>
+nnoremap <Leader>t :TagbarToggle<CR>
+nnoremap <Leader>n :NERDTreeToggle<CR>
+
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+imap <C-L> <Right>
+imap <C-H> <Left>
+imap <C-J> <Down>
+imap <C-K> <Up>
+
+set nofoldenable
+set noshowmode
+set laststatus=2
+set number
+set nobackup
+set background=dark
+"colorscheme solarized
+colorscheme dracula
+
+" Setup YouCompleteMe
+let g:ycm_python_binary_path = 'python3'
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_semantic_triggers = {'elm' : ['.'],}
+
+" Setup vim airline
+let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+"let g:airline_theme='lucius'
+"let g:airline_theme='luna'
+let g:airline_powerline_fonts = 1
+
+" Setup NERDTree
+" open NERDTree automatically, if open a folder or no file specify
+" exit NERDTree if the only window left is NERDTree
+" \ + n to toggle on and off NERDTree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" Setup vim-jsx jsx extensiion requirement to be false
+let g:jsx_ext_required = 0
+
+" Setup python-mode
+let g:pymode_python = 'python3'
+let g:pymode_rope=0
+let g:pymode_lint_cwindow = 0
+
+" Setup nerdcommenter
+let g:NERDSpaceDelims = 1
+
+" Setup ALE
+let g:ale_sign_column_always = 1
+
+autocmd FileType html setlocal softtabstop=2 shiftwidth=2 tabstop=2
+autocmd FileType css setlocal softtabstop=2 shiftwidth=2 tabstop=2
+autocmd FileType javascript setlocal softtabstop=2 shiftwidth=2 tabstop=2
+autocmd FileType javascript.jsx setlocal softtabstop=2 shiftwidth=2 tabstop=2
+autocmd FileType python setlocal softtabstop=4 shiftwidth=4 tabstop=4 foldmethod=indent foldlevel=99
+
