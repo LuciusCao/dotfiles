@@ -207,4 +207,3 @@ autocmd FileType css setlocal softtabstop=2 shiftwidth=2 tabstop=2
 autocmd FileType javascript setlocal softtabstop=2 shiftwidth=2 tabstop=2
 autocmd FileType javascript.jsx setlocal softtabstop=2 shiftwidth=2 tabstop=2
 autocmd FileType python setlocal softtabstop=4 shiftwidth=4 tabstop=4 foldmethod=indent foldlevel=99
-
