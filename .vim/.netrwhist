@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/Users/LuciusCao/.julia'
+let g:netrw_dirhist_2='/Users/LuciusCao/masteringJulia'
+let g:netrw_dirhist_3='/Users/LuciusCao/.matplotlib'
+let g:netrw_dirhist_4='/usr/local/Cellar/tesseract/3.04.01_1/share/tessdata/configs'
+let g:netrw_dirhist_5='/usr/local/Cellar/tesseract/3.04.01_1/share/tessdata/tessconfigs'
+let g:netrw_dirhist_6='/Users/LuciusCao/.vim/bundle/sparkup'
+let g:netrw_dirhist_7='/Users/LuciusCao/.zsh'
+let g:netrw_dirhist_8='/Users/LuciusCao/.vim/bundle/Vundle.vim'
