@@ -184,6 +184,7 @@ let g:airline_powerline_fonts = 1
 " open NERDTree automatically, if open a folder or no file specify
 " exit NERDTree if the only window left is NERDTree
 " \ + n to toggle on and off NERDTree
+let NERDTreeShowHidden=1
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
