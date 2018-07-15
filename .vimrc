@@ -21,7 +21,6 @@ Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Valloric/YouCompleteMe'
-" Plugin 'valloric/MatchTagAlways'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'fatih/vim-go'
 Plugin 'tpope/vim-surround'
@@ -36,6 +35,7 @@ Plugin 'w0rp/ale'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'python-mode/python-mode'
 Plugin 'elmcast/elm-vim'
+Plugin 'reasonml-editor/vim-reason-plus'
 
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'dracula/vim'
@@ -204,6 +204,12 @@ let g:NERDSpaceDelims = 1
 
 " Setup ALE
 let g:ale_sign_column_always = 1
+
+" Setup ReasonML env
+let g:LanguageClient_serverCommands = {
+    \ 'reason': ['ocaml-language-server', '--stdio'],
+    \ 'ocaml': ['ocaml-language-server', '--stdio'],
+    \ }
 
 " Setup FZF
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
