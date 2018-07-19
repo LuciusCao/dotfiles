@@ -202,6 +202,7 @@ let g:pymode_lint_cwindow = 0
 " Setup nerdcommenter
 let g:NERDSpaceDelims = 1
 let NERDTreeShowHidden=1
+let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
 
 " Setup ALE
 let g:ale_sign_column_always = 1
@@ -212,7 +213,6 @@ let g:LanguageClient_serverCommands = {
     \ 'ocaml': ['ocaml-language-server', '--stdio'],
     \ }
 
-" Setup FZF
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
