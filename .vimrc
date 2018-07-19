@@ -201,6 +201,7 @@ let g:pymode_lint_cwindow = 0
 
 " Setup nerdcommenter
 let g:NERDSpaceDelims = 1
+let NERDTreeShowHidden=1
 
 " Setup ALE
 let g:ale_sign_column_always = 1
