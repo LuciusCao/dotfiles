@@ -33,9 +33,10 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'raimondi/delimitmate'
 Plugin 'w0rp/ale'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'python-mode/python-mode'
 Plugin 'elmcast/elm-vim'
 Plugin 'reasonml-editor/vim-reason-plus'
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'vim-scripts/indentpython.vim'
 
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'dracula/vim'
@@ -83,9 +84,9 @@ map Q gq
 inoremap <C-U> <C-G>u<C-U>
 
 " In many terminal emulators the mouse works just fine, thus enable it.
-if has('mouse')
-	set mouse=a
-endif
+" if has('mouse')
+	" set mouse=a
+" endif
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -138,6 +139,7 @@ endif
 set splitbelow
 set splitright
 set smartindent
+set encoding=utf-8
 
 " nnoremap <Leader>j <C-W><C-J>
 " nnoremap <Leader>k <C-W><C-K>
@@ -194,11 +196,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " Setup vim-jsx jsx extensiion requirement to be false
 let g:jsx_ext_required = 0
 
-" Setup python-mode
-let g:pymode_python = 'python3'
-let g:pymode_rope=0
-let g:pymode_lint_cwindow = 0
-
 " Setup nerdcommenter
 let g:NERDSpaceDelims = 1
 let NERDTreeShowHidden=1
@@ -228,6 +225,9 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
+
+" Setup SimpyFold
+let g:SimpylFold_docstring_preview=1
 
 autocmd FileType html setlocal softtabstop=2 shiftwidth=2 tabstop=2
 autocmd FileType css setlocal softtabstop=2 shiftwidth=2 tabstop=2
