@@ -38,7 +38,7 @@ Plugin 'reasonml-editor/vim-reason-plus'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'vim-scripts/indentpython.vim'
 
-Plugin 'altercation/vim-colors-solarized'
+" Plugin 'altercation/vim-colors-solarized'
 Plugin 'dracula/vim'
 
 call vundle#end()            " required
@@ -145,7 +145,7 @@ set encoding=utf-8
 " nnoremap <Leader>k <C-W><C-K>
 " nnoremap <Leader>l <C-W><C-L>
 " nnoremap <Leader>h <C-W><C-H>
-nnoremap <Leader>q :noh<CR> 
+nnoremap <Leader>q :noh<CR>
 nnoremap <C-N> : YcmCompleter GoTo<CR>
 nnoremap <C-P> :FZF<CR>
 " nnoremap <Leader>b :buffers<CR>:buffer<Space>
@@ -165,8 +165,7 @@ set noshowmode
 set laststatus=2
 set number
 set nobackup
-set background=dark
-"colorscheme solarized
+" colorscheme solarized
 colorscheme dracula
 
 " Setup YouCompleteMe
@@ -203,6 +202,12 @@ let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
 
 " Setup ALE
 let g:ale_sign_column_always = 1
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint'],
+\   'python': ['autopep8'],
+\}
 
 " Setup ReasonML env
 let g:LanguageClient_serverCommands = {
@@ -210,7 +215,49 @@ let g:LanguageClient_serverCommands = {
     \ 'ocaml': ['ocaml-language-server', '--stdio'],
     \ }
 
-command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
+" command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
+function! s:ag_to_qf(line)
+  let parts = split(a:line, ':')
+  return {'filename': parts[0], 'lnum': parts[1], 'col': parts[2],
+        \ 'text': join(parts[3:], ':')}
+endfunction
+
+function! s:ag_handler(lines)
+  if len(a:lines) < 2 | return | endif
+
+  let cmd = get({'ctrl-x': 'split',
+               \ 'ctrl-v': 'vertical split',
+               \ 'ctrl-t': 'tabe'}, a:lines[0], 'e')
+  let list = map(a:lines[1:], 's:ag_to_qf(v:val)')
+
+  let first = list[0]
+  execute cmd escape(first.filename, ' %#\')
+  execute first.lnum
+  execute 'normal!' first.col.'|zz'
+
+  if len(list) > 1
+    call setqflist(list)
+    copen
+    wincmd p
+  endif
+endfunction
+
+command! -nargs=* Ag call fzf#run({
+\ 'source':  printf('ag --nogroup --column --color "%s"',
+\                   escape(empty(<q-args>) ? '^(?=.)' : <q-args>, '"\')),
+\ 'sink*':    function('<sid>ag_handler'),
+\ 'options': '--ansi --expect=ctrl-t,ctrl-v,ctrl-x --delimiter : --nth 4.. '.
+\            '--multi --bind=ctrl-a:select-all,ctrl-d:deselect-all '.
+\            '--color hl:68,hl+:110',
+\ 'down':    '40%'
+\ })
+
+command! -bang -nargs=* Agp
+  \ call fzf#vim#ag(<q-args>,
+  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \                 <bang>0)
+
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
@@ -234,3 +281,7 @@ autocmd FileType css setlocal softtabstop=2 shiftwidth=2 tabstop=2
 autocmd FileType javascript setlocal softtabstop=2 shiftwidth=2 tabstop=2
 autocmd FileType javascript.jsx setlocal softtabstop=2 shiftwidth=2 tabstop=2
 autocmd FileType python setlocal softtabstop=4 shiftwidth=4 tabstop=4 foldmethod=indent foldlevel=99
+
+" Overwrite Dracula colorscheme settings
+hi! link Type DraculaCyan
+hi! link SpecialComment DraculaCyan
