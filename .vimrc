@@ -187,6 +187,7 @@ let g:airline_powerline_fonts = 1
 " exit NERDTree if the only window left is NERDTree
 " \ + n to toggle on and off NERDTree
 let NERDTreeShowHidden=1
+let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$', '\.cache$', '\.git$', '\.ipynb_checkpoints$']
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
@@ -197,8 +198,6 @@ let g:jsx_ext_required = 0
 
 " Setup nerdcommenter
 let g:NERDSpaceDelims = 1
-let NERDTreeShowHidden=1
-let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
 
 " Setup ALE
 let g:ale_sign_column_always = 1
