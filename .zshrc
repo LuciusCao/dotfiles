@@ -85,7 +85,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
-# 
+#
 
 export DEFAULT_USER=`whoami`
 
@@ -119,6 +119,7 @@ alias gits="git status"
 alias gitf="git fetch"
 alias gitc="git commit"
 alias gitp="git push"
+# alias flatten_dir="find . -mindepth 2 -type f -print -exec mv {} . \;"
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
@@ -128,3 +129,4 @@ alias gitp="git push"
 [[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
 
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+eval "$(direnv hook zsh)"
