@@ -37,6 +37,7 @@ Plugin 'elmcast/elm-vim'
 Plugin 'reasonml-editor/vim-reason-plus'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'vim-scripts/indentpython.vim'
+Plugin 'avakhov/vim-yaml'
 
 " Plugin 'altercation/vim-colors-solarized'
 Plugin 'dracula/vim'
@@ -280,6 +281,7 @@ autocmd FileType css setlocal softtabstop=2 shiftwidth=2 tabstop=2
 autocmd FileType javascript setlocal softtabstop=2 shiftwidth=2 tabstop=2
 autocmd FileType javascript.jsx setlocal softtabstop=2 shiftwidth=2 tabstop=2
 autocmd FileType reason setlocal softtabstop=2 shiftwidth=2 tabstop=2
+autocmd FileType yaml setlocal softtabstop=2 shiftwidth=2 tabstop=2
 autocmd FileType python setlocal softtabstop=4 shiftwidth=4 tabstop=4 foldmethod=indent foldlevel=99
 
 " Overwrite Dracula colorscheme settings
