@@ -119,6 +119,7 @@ alias gits="git status"
 alias gitf="git fetch"
 alias gitc="git commit"
 alias gitp="git push"
+alias pg_start="pg_ctl -D /usr/local/var/postgres start"
 # alias flatten_dir="find . -mindepth 2 -type f -print -exec mv {} . \;"
 
 # tabtab source for serverless package
@@ -136,3 +137,5 @@ export CPPFLAGS="${CPPFLAGS} -I/usr/local/opt/zlib/include"
 
 # For pkg-config to find zlib you may need to set:
 export PKG_CONFIG_PATH="${PKG_CONFIG_PATH} /usr/local/opt/zlib/lib/pkgconfig"
+
+export PGDATA="/usr/local/var/postgres"
