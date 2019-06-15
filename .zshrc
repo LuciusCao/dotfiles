@@ -92,6 +92,7 @@ export DEFAULT_USER=`whoami`
 eval "$(rbenv init -)"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+eval "$(pipenv --completion)"
 
 function setproxy() {
     export ALL_PROXY=socks5://127.0.0.1:1086
