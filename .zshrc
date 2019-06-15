@@ -89,6 +89,10 @@ source $ZSH/oh-my-zsh.sh
 
 export DEFAULT_USER=`whoami`
 
+export CMAKE_PREFIX_PATH=/Users/LuciusCao/Qt/5.7/clang_64/lib/cmake:$CMAKE_PREFIX_PATH
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
 eval "$(rbenv init -)"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
@@ -114,6 +118,9 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 fpath=(/usr/local/share/zsh-completions $fpath)
+
+export PIPENV_VENV_IN_PROJECT=1
+export PIPENV_PYPI_MIRROR="http://mirrors.aliyun.com/pypi/simple"
 
 alias ipy="ipython"
 alias gits="git status"
