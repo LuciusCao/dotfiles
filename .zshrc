@@ -147,3 +147,4 @@ export CPPFLAGS="${CPPFLAGS} -I/usr/local/opt/zlib/include"
 export PKG_CONFIG_PATH="${PKG_CONFIG_PATH} /usr/local/opt/zlib/lib/pkgconfig"
 
 export PGDATA="/usr/local/var/postgres"
+export PATH="/usr/local/opt/sqlite/bin:$PATH"
